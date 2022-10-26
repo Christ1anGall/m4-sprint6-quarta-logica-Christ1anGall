@@ -1,21 +1,20 @@
-import { database } from "../database"
-import User from "../entities/User"
+import { database } from "../database";
+import User from "../entities/User";
 
-interface Iuser{
-  name: string
-  email: string
-  password: string
+export interface Iuser {
+  name: string;
+  email: string;
+  password: string;
 }
 
-export default function({name, email, password}: Iuser) {
-  
-  const userAlreadyExists = database.find( user => user.email === email)
-  
-  if(userAlreadyExists) throw new Error("User already exists.")
+export default function ({ name, email, password }: Iuser) {
+  const userAlreadyExists = database.find((user) => user.email === email);
 
-  const newUser = new User(name, email, password)
+  if (userAlreadyExists) throw new Error("User already exists.");
 
-  database.unshift(newUser)
+  const newUser = new User(name, email, password);
 
-  return newUser
+  database.unshift(newUser);
+
+  return newUser;
 }
